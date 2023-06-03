@@ -10,7 +10,7 @@ class BooksController < ApplicationController
      redirect_to book_path(@book.id)
     else
      render :new
-   end
+    end
   end
 
   def index
@@ -25,12 +25,17 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
+
   def update
-    book = Book.find(params[:id])
-    if book.update(book_params)
+   @book = Book.find(params[:id])
+
+    if @book.update(book_params)
       flash[:notice] = "編集が成功しました"
-       redirect_to book_path(book.id)
+       redirect_to book_path(@book.id)
+    else
+    render :edit
     end
+
   end
 
 def destroy
