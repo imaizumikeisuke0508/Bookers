@@ -1,10 +1,51 @@
 <h1>投稿一覧</h1>
-<% @books.each do |book| %>
 
-<p>タイトル</p>
- <span>
-    <%= link_to book.title, "book_path(book.id)" %>
- </span>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th class="header1">Title</th>
+      <th class="header2">body</th>
+    </tr>
+  </thead>
+    <% @books.each do |book| %>
+  <tbody>
+      <td>
+      <%= book.title %>
+      </td>
+      <td>
+      <%= book.body %>
+      </td>
+      <td>
+       <%= link_to "詳細", book_path(book.id) %>
+       <%= link_to "編集", edit_book_path(book.id) %>
+       <%= link_to "削除", book_path(book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      </td>
+      <% end %>
+
+
+</table>
+
+
+<h1> Books </h1>
+<% if @book.errors.any? %>
+ <%= @book.errors.count %>件のエラーが発生しました
+ <ul>
+  <% @book.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+  <% end %>
+ </ul>
+ <% end %>
+
+<%= form_with model: @book, url: '/books', method: :post do |f| %>
+ <h2> New Book </h2>
+
+ <h4> Title </h4>
+ <%= f.text_field :title %>
+
+ <h4>Body</h4>
+   <%= f.text_area :body %>
+
+   <%= f.submit 'Create Book' %>
 
 <% end %>

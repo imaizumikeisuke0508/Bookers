@@ -21,3 +21,6 @@
   <%= f.submit '保存' %>
 
 <% end %>
+
+<%= link_to "詳細", book_path(@book.id) %>
+<%= link_to "一覧へ戻る", "/books" %>
