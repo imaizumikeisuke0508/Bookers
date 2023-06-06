@@ -1,4 +1,14 @@
-<h1>投稿一覧</h1>
+<h1>Books</h1>
+<% if @book.errors.any? %>
+ <%= @book.errors.count %>　errors occurred
+ <ul>
+  <% @book.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+  <% end %>
+ </ul>
+ <% end %>
+ 
+ <div><%= flash[:notice] %></div>
 
 
 <table class="table">
@@ -17,25 +27,15 @@
       <%= book.body %>
       </td>
       <td>
-       <%= link_to "詳細", book_path(book.id) %>
-       <%= link_to "編集", edit_book_path(book.id) %>
-       <%= link_to "削除", book_path(book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+       <%= link_to "show", book_path(book.id) %>
+       <%= link_to "edit", edit_book_path(book.id) %>
+       <%= link_to "Destroy", book_path(book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
       </td>
       <% end %>
 
 
 </table>
 
-
-<h1> Books </h1>
-<% if @book.errors.any? %>
- <%= @book.errors.count %>件のエラーが発生しました
- <ul>
-  <% @book.errors.full_messages.each do |message| %>
-  <li><%= message %></li>
-  <% end %>
- </ul>
- <% end %>
 
 <%= form_with model: @book, url: '/books', method: :post do |f| %>
  <h2> New Book </h2>
