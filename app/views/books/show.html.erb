@@ -7,5 +7,4 @@
 <p><%= @book.body %></p>
 
  <%= link_to "edit", edit_book_path(@book.id) %>
- <%= link_to "destroy", book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
- <%= link_to "Back", "/books" %>
+ <%= link_to "back", "/books" %>
